@@ -35,7 +35,7 @@ const account = {
   },
 
   getBalance() {
-    console.log(`Текущий баланс: ${this.balance}`)ж
+    console.log(`Текущий баланс: ${this.balance}`);
     return this.balance;
   },
 
