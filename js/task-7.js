@@ -72,10 +72,14 @@ account.withdraw(12000);
 console.table(account);
 account.getBalance();
 
-console.table(account.transactions);
+console.log(account.transactions);
 
 account.getTransactionDetails(2);
 
 account.getTransactionTotal('deposit');
 account.getTransactionTotal('withdraw');
 console.table(account);
+
+account.withdraw(10000);
+account.getBalance();
+console.log(account.transactions);
