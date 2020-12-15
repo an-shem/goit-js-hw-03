@@ -1,60 +1,81 @@
-// const Transaction = {
-//   DEPOSIT: 'deposit',
-//   WITHDRAW: 'withdraw',
-// };
-// let id = 0;
+const Transaction = {
+  DEPOSIT: 'deposit',
+  WITHDRAW: 'withdraw',
+};
+let id = 0;
 
-// const account = {
-//   balance: 0,
-//   transactions: [],
+const account = {
+  balance: 0,
+  transactions: [],
 
-//   createTransaction(amount, type) {
-//     id += 1;
-//     return {
-//       id,
-//       type,
-//       amount,
-//     };
-//   },
+  createTransaction(amount, type) {
+    id += 1;
+    return {
+      id,
+      type,
+      amount,
+    };
+  },
 
-//   deposit(amount) {
-//     this.transactions.push(this.createTransaction(amount, Transaction.DEPOSIT));
-//   },
+  deposit(amount) {
+    this.balance += amount;
+    this.transactions.push(this.createTransaction(amount, Transaction.DEPOSIT));
+  },
 
-//   withdraw(amount) {
-//     if (amount > balance) {
-//       console.log(`Снятие такой суммы не возможно, недостаточно средств.`);
-//       return;
-//     }
-//     this.transactions.puch(createTransaction(amount, DEPOSIT));
-//   },
+  withdraw(amount) {
+    if (amount > this.balance) {
+      console.log(`Снятие такой суммы не возможно, недостаточно средств.`);
+      return;
+    }
+    this.balance -= amount;
+    this.transactions.push(
+      this.createTransaction(amount, Transaction.WITHDRAW),
+    );
+  },
 
-//   getBalance() {
-//     console.log(`Текущий баланс: ${this.balance}`);
-//   },
+  getBalance() {
+    return console.log(`Текущий баланс: ${this.balance}`);
+  },
 
-//   getTransactionDetails(id) {
-//     for (const obj of transactions) {
-//       if (obj.id === id) {
-//         console.log(obj);
-//         return obj;
-//       }
-//     }
-//   },
+  getTransactionDetails(id) {
+    for (const obj of this.transactions) {
+      if (obj.id === id) {
+        console.log(obj);
+        return obj;
+      }
+    }
+  },
 
-//   getTransactionTotal(type) {
-//     let total = 0;
-//     for (const obj of transactions) {
-//       if (obj.type === type) {
-//         total += obj.amount;
-//         console.log(`Общая сумма ${type}: ${total}`);
-//         return total;
-//       }
-//     }
-//   },
-// };
-// account.deposit(15000);
-// console.table(account);
+  getTransactionTotal(type) {
+    let total = 0;
+    for (const obj of this.transactions) {
+      if (obj.type === type) {
+        total += obj.amount;
+      }
+    }
+    console.log(`Общая сумма ${type}: ${total}`);
+    return total;
+  },
+};
 
-// account.deposit(4000);
-// console.table(account);
+//
+// ПРОВЕРКА
+
+account.deposit(15000);
+console.table(account);
+
+account.deposit(4000);
+console.table(account);
+account.getBalance();
+
+account.withdraw(12000);
+console.table(account);
+account.getBalance();
+
+console.table(account.transactions);
+
+account.getTransactionDetails(2);
+
+account.getTransactionTotal('deposit');
+account.getTransactionTotal('withdraw');
+console.table(account);
