@@ -24,8 +24,9 @@ const account = {
 
   withdraw(amount) {
     if (amount > this.balance) {
-      console.log(`Снятие такой суммы не возможно, недостаточно средств.`);
-      return;
+      return console.log(
+        `Снятие такой суммы не возможно, недостаточно средств.`,
+      );
     }
     this.balance -= amount;
     this.transactions.push(
@@ -34,7 +35,8 @@ const account = {
   },
 
   getBalance() {
-    return console.log(`Текущий баланс: ${this.balance}`);
+    console.log(`Текущий баланс: ${this.balance}`)ж
+    return this.balance;
   },
 
   getTransactionDetails(id) {
